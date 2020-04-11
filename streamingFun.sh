@@ -32,7 +32,7 @@ set -o nounset                              # Treat unset variables as an error
      STREAM_KEY="$1" # use the terminal command Streaming streamkeyhere to stream your video to twitch or justin
      SERVER="live-atl" # twitch server in frankfurt, see https://stream.twitch.tv/ingests/ for list
 
-     ffmpeg -f x11grab -s "$INRES" -r "$FPS" -i :0.0 -f pulse -i 0 -f flv -ac 2 -ar $AUDIO_RATE \
+     ffmpeg -f x11grab -s "$INRES" -r "$FPS" -i :0.0+1920,0 -f pulse -i 0 -f flv -ac 2 -ar $AUDIO_RATE \
        -vcodec libx264 -g $GOP -keyint_min $GOPMIN -b:v $CBR -minrate $CBR -maxrate $CBR -pix_fmt yuv420p\
        -s $OUTRES -preset $QUALITY -tune film -acodec aac -threads $THREADS -strict normal \
        -bufsize $CBR "rtmp://$SERVER.twitch.tv/app/$STREAM_KEY" -c:v copy -vcodec libx264 -acodec aac -f flv output.flv
