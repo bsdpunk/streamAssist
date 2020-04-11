@@ -18,7 +18,7 @@
 #===============================================================================
 
 set -o nounset                              # Treat unset variables as an error
-screenkey -m
+screenkey 
 nm-applet
 streaming $1
 alias mpv="mpv -vo caca"
